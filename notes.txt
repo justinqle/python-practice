@@ -1,0 +1,563 @@
+Personal notes from the official Python 3.7 Tutorial: https://docs.python.org/3/tutorial/
+
+Note - This tutorial is best done if you already have previous programming experience.
+A lot of the topics covered are Python-specific and benefit from knowing another OOP language.
+If new to programming, I would recommend a course teaching CS fundamentals using Python.
+Subsequently, these notes leave out a lot of general programming langauge principles that are not Python-specific.
+
+Python-specific arithmetic operators:
+  // for floor division
+  ** for powers
+  _ var for last printed expression
+
+Strings:
+  r before quote for raw strings; ignores escape backslashes
+  consecutive string literals for easy concatenation!
+    e.g. 'Py' 'thon'
+  var and literal concatenation needs + operator
+  Strings can be indexed easily!! No separate char type. Char is simply a string of size 1.
+  Woah, negative indexing!! Used for indexing right to left
+    e.g. word = 'Justin'
+    word[-1] prints 'n'
+    word[-6] prints 'J'
+    Just think of -1 as starting index and -6 as length or last index
+  Python strings are IMMUTABLE
+  len() returns length of a string
+  Triple quotes for multi-line strings
+
+Slicing (works for strings, lists, tuples, arrays, and slice objects):
+  e.g. word[0:2]
+  left inclusive, right exclusive
+  Can also do word[:2] to get first two chars
+  Or word[2:] starting at third char to get everything after
+  (i.e. omitted side defaults to 0)
+
+List:
+  Compound data type
+  HETEROGENEOUS
+  Use square brackets []
+  Can be sliced or indexed to return a new list
+  Support concatenation
+  MUTABLE
+  .append() to add to end of list
+  Can be assigned to slices
+  len() works with lists
+  List nesting functions as a 2D array list
+
+Arrays:
+  array()
+  Generally don't need to use
+  Homogeneous C array
+
+Multi-assignments:
+  x,y = 1,2
+  Occur SIMULTANEOUSLY
+  Right-hand side evaluated first, left to right
+
+Boolean Values:
+  Follows C convention
+  0, empty sequence = false
+  non-0, non-empty sequence = true
+
+print():
+  Comma-separate print arguments to print with spaces in-between
+  print(string, end=',') - replaces new line character with specified string
+
+Conditionals:
+  elif instead of else if
+
+Loops:
+  for w in words: (similiar to for each loop)
+  Can loop over iterables (string, list, etc.)
+  Always use slices (i.e. words[:]) when modifying list while iterating
+    Slices do a shallow copy and prevent infinite looping
+  range() - immutable sequence of numbers
+    Returns an iterable (immutable sequence type), NOT a list
+  else clause - immediately follows a for loop on same indentation
+    Only executed if break statement did not occur and loop exhausted
+
+Pass:
+  Does nothing
+  Used to fill places where a statement is required syntatically
+  Commonly used for creating minimal classes
+  Can also be used as placeholder for function or conditional body
+
+Functions:
+  def function():
+  Can assign references to functions
+  Functions that don't return values return None (built-in value)
+  Also empty argument functions return None
+  There are Methods (Class functions)
+
+Docstrings:
+  doc string (""") as first statement in function
+  e.g.
+  """Do nothing, but document it.
+
+  No, really, it doesn't do anything.
+  """
+
+Keyword Arguments:
+  Keyword vs. Positional
+  (arg=9, 9)
+  Note: Keyword Args must follow Positional Args
+  Keyword Args are optional, Positional Args are required
+  e.g.
+    def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
+    Valid:
+      parrot(1000)                                          # 1 positional argument
+      parrot(voltage=1000)                                  # 1 keyword argument
+      parrot(voltage=1000000, action='VOOOOOM')             # 2 keyword arguments
+      parrot(action='VOOOOOM', voltage=1000000)             # 2 keyword arguments
+      parrot('a million', 'bereft of life', 'jump')         # 3 positional arguments
+      parrot('a thousand', state='pushing up the daisies')  # 1 positional, 1 keyword
+      parrot(type='Cockatoo')                               # Can specify later keyword arguments
+    Invalid:
+      parrot()                     # required argument missing
+      parrot(voltage=5.0, 'dead')  # non-keyword argument after a keyword argument
+      parrot(110, voltage=220)     # duplicate value for the same argument
+      parrot(actor='John Cleese')  # unknown keyword argument
+
+  Keyword Args allow for Default Argument Values
+    e.g. function(value=0)
+  Default values are evaluated at point of function definition in defining scope
+  * Default values are evaluated only ONCE (be careful with mutable objects)
+  Do this to not share default values over subsequent calls:
+  def f(a, L=None):
+      if L is None:
+          L = []
+      L.append(a)
+      return L
+
+Arguments:
+  *arguments = list or arbitrary list
+  **keywords = dictionary or arbitary keyword values
+
+Argument Unpacking: (for functions with separate positional arguments)
+  * to unpack arguments from list or tuple
+  ** for dictionaries
+
+Lambda Expressions for Anonymous Functions:
+  1) Use to return function
+  2) Pass small function as argument
+
+General Coding Style:
+  Function annotations for metadata
+  PEP 8 Coding Style Guide
+  Camel Case for classes
+  Snake case for functions/methods
+
+List methods:
+  Insert, remove, sort - return None
+  Using Lists as Stacks
+  For Queues, lists are not recommended; Instead, use collections.deque
+  map(fun, iter) - returns map object that can be passed to list() after applying fun to each item in iter
+  del li[i] - deleting at an index (works on slices as well) (can remove entire variables)
+  remove(val) - removing first occurrence of val
+  pop(i) - removes item at specified index and returns it
+
+List Comprehensions:
+  Apply operation to each member or create subsequence satisfying a condition
+  Square brackets containing an expression followed by a for clause then zero or more if clauses
+  Tuples must be parenthesized after list comprehension
+  Nested list comprehensions
+  Dictionary comprehensions
+
+Sequence Types:
+  Range
+  List
+  Tuples - parantheses generally, commma separated, can not assign to items of tuple, but can contain mutable objects
+    () empty tuple
+    'hello', single value tuple (trailing comma)
+
+Tuple packing:
+  t = 12345, 54321, 'hello!'
+
+Sequence unpacking:
+  x, y, z = t
+  3 vars, num elements in t must also be 3
+
+Sets:
+  Unordered collection with no duplicate elements
+  Uses - membership testing and eliminating duplicate elements
+  {val, val} or set() to create
+  set() for empty set, NOT {} (creates empty dictionary)
+  Set operations
+  Set comprehensions
+
+Dictionaries:
+  Indexed by keys (any immutable type)
+  Can use tuples (can't contain mutable objects however)
+  key:value pairs where keys are unique
+  {} - empty
+  {'val1': 1, 'val2': 2}
+  del to delete key/value pair
+  insterting a duplicate key overwrites old value with new value
+  Error trying to extract value of non-existent key
+  Get keys: list(dict) OR list(dict.keys())
+  Get values: list(dict.values())
+  Methods - sorted(dict), key in dict
+  dict() to build dictionary directly from sequence of key/val pairs
+  Dictionary comprehensions
+  dict() with keyword arguments
+  item() - list of key value tuple pairs
+
+Looping Techniques:
+  Dictionaries:
+    for k, v in knights.items():
+    ...     print(k, v)
+
+  zip() to loop over multiple sequences at the same time:
+    for q, a in zip(questions, answers):
+    ...     print('What is your {0}?  It is {1}.'.format(q, a))
+
+  reversed(seq): looping over seq in reverse order
+  sorted(seq): looping over seq in sorted order
+  *** Often simpler and easier to create and add to a new list than changing a list while looping through it ***
+
+Conditions:
+  in / not in
+  is / is not (if two vars point to same object)
+  Comparison operators have same priority but lower than numerical operators
+  Can chain comparisons
+    and, or, not
+  Short-circuit operators
+    Can assign boolean expression to var and value will be last evaluated expression
+  Assignment can not occur in expressions
+
+Comparison:
+  Lexicographical ordering to compare sequences
+  Mixed numeric types compared with actual values
+
+Module:
+  file containing Python definitions and statements
+  __name__ to get module name
+  Importing modules using from and import
+
+    import fibo as fib
+    fib.fib(500)
+
+    from fibo import fib, fib2
+    fib(500)
+
+  Executable statements initializing module
+  modname.globalvar/function
+  from fibo import * (bad practice)
+  Can combine from, import, and as
+  Executing modules set __name__ to __main__; the importable module can also be used as a script with arguments
+  Module Search Path: Built-in, sys.path (dir containing input script, PYTHONPATH, installation-dependent default)
+  Compiled Python files
+  import sys (standard modules - e.g. system calls, OS)
+  dir() or dir(module) - what names a module defines
+    dir(builtins)
+
+Packages:
+  e.g. import sound.effects.echo (each a directory)
+  Module must be referenced with full name
+    OR: from import sound.effects import echo
+        echo.echofilter()
+  Can also import a function directly
+    from package import item (item is submodule, subpackage, name, function, class, var)
+  __init__.py needed to treat directories as containing packages
+    __all__ in __init__.py needs to be defined when import *
+  Importing sub modules can be tricky
+  Avoid import *
+    Use from package import submodule
+  Intra-package references
+  Packages in multi dir: __path__
+
+Input and Output:
+  Output formatting:
+    Formatted String Literals (3.6) - f'{val}'
+    str.format() - '{:-9} YES votes  {:2.2%}'.format(yes_votes, percentage)
+    Do it manually
+
+  repr() or str() for debugging
+    repr() - read by interpreter
+    str() - human-readable
+
+  print(f'The value of pi is approximately {math.pi:.3f}.')
+  print(f'{name:10} ==> {phone:10d}')
+
+  print('{0} and {1}'.format('spam', 'eggs'))  
+  print('{1} and {0}'.format('spam', 'eggs'))
+
+  print('This {food} is {adjective}.'.format(
+  ...       food='spam', adjective='absolutely horrible'))
+
+  table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 8637678}
+  >>> print('Jack: {0[Jack]:d}; Sjoerd: {0[Sjoerd]:d}; '
+  ...       'Dcab: {0[Dcab]:d}'.format(table))
+
+  table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 8637678}
+  >>> print('Jack: {Jack:d}; Sjoerd: {Sjoerd:d}; Dcab: {Dcab:d}'.format(**table))
+  Jack: 4098; Sjoerd: 4127; Dcab: 8637678
+
+  open(filename, mode)
+    'r', 'w', 'a' 'r+'
+  Text mode vs binary mode
+
+  >>> with open('workfile') as f:
+  ...     read_data = f.read()
+  (with handles file closing)
+
+  f.read() -> text, ' ' for EOF
+  f.readline() includes \n
+  ' ' EOF
+  \n blank line
+  Can also loop over file object to print lines
+  list(f) or .readlines() for list of lines
+
+  f.write(string), returns number of characters written
+  Convert other objects to string before writing
+
+  f.tell() file object's current position
+  f.seek() for changing an object's position
+
+  JSON for saving structured data
+  Python data hierarchies -> string representations (serializing)
+  Vice versa (deserializing)
+  json.dumps(), dump(), load()
+
+Errors and Exceptions:
+
+  Syntax Erros - token preceding arrow
+  Exceptions
+
+  Exception Handling using try/except (concepts similiar to Java try/catch)
+  Order excepts from smallest inheritance to largest
+
+  except: wildcard
+  else: clause, try does not raise exception
+    Used to encapsulate exception
+
+  Exception arguments
+  ...     x, y = inst.args     # unpack args
+  Also handles exceptions inside functions
+
+  Raising Exceptions
+  raise for reraising exceptions
+
+  User-defined exceptions
+
+  finally clause ALWAYS executed
+  Good for releasing external resources
+  Or use ~with~ for predefined clean-up actions
+
+Classes:
+  Similiar to Java with Inheritance
+  Class members public by default
+  Member functions are virtual
+  Explicit first argument for all functions referencing object: self
+  Built-ins can be extended
+  Aliasing and Pointers (pass by value of pointer)
+
+Namespace:
+  mapping from names to objects, no relation between names in different namespaces
+  Can write and delete attributes of modules
+  Namespaces are created at different moments and have different lifetimes
+  Examples of namespaces are:
+    the set of built-in names (containing functions such as abs(), and built-in exception names)
+    the global names in a module
+    and the local names in a function invocation.
+
+Scope: (closely related to namespace)
+  textual region of a Python program where a namespace is directly accessible
+  Order of search for var:
+    1) innermost scope's namespace
+    2) scope of enclosing functions
+    3) next-to-last scope: module's global names
+    4) outermost scope (built-in names)
+  Keywords
+    global: go directly to module's global namespace
+    nonlocal: rebind variables outside innermost scope
+  SEE: 9.2.1. Scopes and Namespaces Example
+
+More on Classes:
+  class:
+  def:
+
+  Classes have mainly functions but can also have other statements
+  Class is defined -> new namespace -> used as local scope
+  Binding object / definition with name
+  Class is def is left -> class object created -> original local scope reinstated -> class object bound to class name
+
+  Class objects support attribute references and instantiation
+  Valid attr names are in class namespace
+  Class instantiation uses function notation
+
+  __init__(self, args) is pretty much a constructor
+
+  Instance Objects = attribute references = data attributes = methods
+
+Method objects vs. function objects:
+  Can store method objects in variables
+  x.f() = MyClass.f(x)
+  Instance object is passed as the first argument of a function
+  Instance and method objects use dot operator
+
+Class vs instance variables:
+
+  class Dog:
+
+      kind = 'canine'         # class variable shared by all instances
+
+      def __init__(self, name):
+          self.name = name    # instance variable unique to each instance
+
+  Be careful using mutable objects as class variables!
+  Data attributes override method attributes with the same name
+  self refers to instance variables instead of local
+  Can assign function objects
+  Methods can call other methods using self
+  Class is never global scope, module is
+  global and nonlocal mainly used for modifying a global var or nonlocal var
+  If just accessing it, the scope rules follow until the name is found
+  Can fill out attributes of empty classes
+
+Inheritance:
+  class DerivedClassName(BaseClassName):
+  The name BaseClassName must be defined in a scope containing the derived class definition.
+  Can also use submodules.
+
+  Normal inheritance rules from Java follow.
+
+  Overriding is possibly
+  Extending base class function:
+    BaseClassName.methodname(self, arguments) = super.methodname()
+
+  isinstance() and issubclass()
+
+  Multiple Inheritance (Multiple base classes)
+    Depth-first, left-to-right
+
+Private variables (or lack of):
+  No mechanism for private variables
+  However, good practice to prefix ones with __
+  __spam gets replaced with __classname_spam
+  Example of name mangling, useful for subclass overriding
+  _ implementation detail for private
+  __ name-mangling mechanism (generally never used)
+
+Iterators:
+  Behind the scenes
+  For a class, override iter, override next, return self
+  Container objects with iterators (also known as iterables): list, tuple, dictionary, string, file
+
+Generator functions:
+  allows you to declare a function that behaves like an iterator, i.e. it can be used in a for loop.
+  Generators are a simple and powerful tool for creating iterators.
+    They are written like regular functions but use the yield statement whenever they want to return data.
+    Each time next() is called on it, the generator resumes where it left off (it remembers all the data values and which statement was last executed)
+    What makes generators so compact is that the __iter__() and __next__() methods are created automatically.
+    Another key feature is that the local variables and execution state are automatically saved between calls.
+    This made the function easier to write and much more clear than an approach using instance variables like self.index and self.data.
+
+Generator Expressions:
+  similiar to list comprehensions in syntax, use parantheses and where the enclosing function uses the generator right away
+  Mainly within function arguments
+  Iterate over only once, generate values on the fly
+
+List Comprehensions vs Generator Expressions:
+  List comprehensions return a list, while a generator expression is simply just calculated
+  List comprehension []
+  Dictionary comprehension {key: val}, Sets set() or {val, val, val}
+  Tuple comprehension tuple([])
+  Generator expression ()
+
+  >>> data = 'golf'
+  >>> list(data[i] for i in range(len(data)-1, -1, -1))
+  ['f', 'l', 'o', 'g']
+
+  Above is the generator expression way, but also can be done through list comprehensions
+
+Python Interpreter:
+  Before executing the code, it will define a few special variables.
+  For example, if the Python interpreter is running that module (the source file) as the main program
+    it sets the special __name__ variable to have a value "__main__".
+    If this file is being imported from another module, __name__ will be set to the module's name.
+
+Standard Library:
+  import os
+  import shutil (higher level file and directory interface)
+  import glob (making file lists from directory wildcard searches)
+  import sys (command line arguments in argv)
+    Attributes for stdin, stdout, stderr
+    sys.exit()
+  import re (regular expresssions, advanced string processing)
+  import math
+  import random
+  import statistics
+  import urllib.request (retrieving data from URLs)
+  import smtplib (sending mail)
+  import datetime (date/time arithmetic, timezone aware)
+  import zlib, gzip, etc. (data archiving and compression)
+  import timeit (performance measurement)
+  import profile, pstats (identifying time critical sections)
+  import doctest (put test and result into docstring, validates embedded tests)
+  import unittest (more comprehensive set of tests in a separate file)
+
+  Batteries Included Philosophy
+
+Advanced STDLIB Modules:
+  reprlib
+  pprint
+  textwrap
+  locale
+    from string import Template (batch renaming)
+  struct
+  threading (running I/O parallel to other computations)
+    Provides locks, events, condition variables, and semaphores
+  import queue (preferred approach to task coordination)
+  logging (file or sys.stderr)
+  weakref (tracking objects without creating a reference)
+  array (more compact list)
+  from collections import deque (faster appends and pops from the left side, slower looks up in middle)
+    ---> queues, breadth first tree searches
+  bisect (manipulating sorted lists)
+  import heappq (implementing heaps based on regular lists, rearrange list into heap order, repeatedly access smallest element)
+  decimal
+    more flexibility than float for precision, rounding, sigfigs, etc.
+    reproduces math as done by hand, not limitations of binary floating point
+    can specify precision also
+
+Python Memory Management:
+  does automatic memory management (reference counting and garbage collecting)
+
+Virtual Environments:
+  self-contained directory tree that contains a Python installation for a particular version of Python, plus a number of additional packages
+  Used to combat applications with varying version requirements for packages and modules
+
+  Create virtual environments with venv
+  Managing packages with pip
+  Check out Distributing Python Modules guide
+
+Interactive Mode:
+  Tab completion
+  History editing
+  Alternative interactive editors available
+
+Similiar Floting Point problem as C:
+  Binary fractions can't exactly represent floating-point numbers in base 10
+  Python will print rounded true decimal value, but remember that the real value is stored as a the closest binary representation
+  For output, consider string formatting to limit significant digits
+  e.g. .1 + .1 + .1 != .3
+  Rounding will not help either because 0.1 can't be represented exactly in binary
+  But can use post-rounding to round final answers after arithmetic
+  Use decimal or fraction module for more precision
+    float.as_integer_ratio()
+    float.hex()
+    math.fsum()
+
+Representation Error:
+  most decimal fractions can not be represented exactly as binary fractions
+  IEE-754 floating point arithmetic
+  Can only get a little above or below 0.1 for example
+
+Executable Python Scripts:
+  On BSD’ish Unix systems, Python scripts can be made directly executable, like shell scripts, by putting the line
+    #!/usr/bin/env python3.5
+  The script can be given an executable mode, or permission, using the chmod command.
+    chmod +x myscript.py
+  PYTHONSTARTUP environment variable - interactive start up commands
+  Customization Modules
