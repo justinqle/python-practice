@@ -3,11 +3,12 @@ from empty_list import EmptyList
 
 class NonEmptyList(LinkedList):
 
-    def __init__(self):
-        self.next = EmptyList()
+    def __init__(self, data):
+        self.data = data
+        self.next = None
 
     def add(value):
-        return self.next = 
+        self.next = self.next.add(value)
 
     def __iter__(self):
         return self
