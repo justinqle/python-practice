@@ -444,6 +444,19 @@ Iterators:
   For a class, override iter, override next, return self
   Container objects with iterators (also known as iterables): list, tuple, dictionary, string, file
 
+Iterable vs. Iterator:
+  Iterable - sequence of data that you can iterate over using a for loop
+    - has __iter__() method
+  Iterator - object that supports iterator protocol (iteration)
+    - Deconstructed for-loop:
+      - iter() on an iterable object to get iterator
+      - next() on iterator to get next element in sequence
+      - StopIteration exception raised when no elements left
+
+Generators:
+  provide a convenient way to implement the iterator protocol
+  A Generator IS an Iterator and an Iterator IS an Iterable
+
 Generator functions:
   allows you to declare a function that behaves like an iterator, i.e. it can be used in a for loop.
   Generators are a simple and powerful tool for creating iterators.
@@ -454,9 +467,11 @@ Generator functions:
     This made the function easier to write and much more clear than an approach using instance variables like self.index and self.data.
 
 Generator Expressions:
+  Create generators on-the-fly without having to create a separate function and use yield (doesn't have full power of regular function generator however)
   similiar to list comprehensions in syntax, use parantheses and where the enclosing function uses the generator right away
   Mainly within function arguments
   Iterate over only once, generate values on the fly
+  Less memory usage than a list; yields only one item at a time
 
 List Comprehensions vs Generator Expressions:
   List comprehensions return a list, while a generator expression is simply just calculated
